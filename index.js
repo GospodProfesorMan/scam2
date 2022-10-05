@@ -33,3 +33,4 @@ const server = http.Server((req, res) => {
         error_page.pipe(res);
     });
 })
+console.log('started service');
