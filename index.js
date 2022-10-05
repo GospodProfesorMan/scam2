@@ -33,4 +33,7 @@ const server = http.Server((req, res) => {
         error_page.pipe(res);
     });
 })
+server.listen(process.env.PORT || 8080, () => {
+    console.log("server is running");
+});
 console.log('started service');
