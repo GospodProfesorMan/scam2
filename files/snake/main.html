@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake game</title>
+    <style>
+        body {
+            background: black;
+            margin: 0;
+        }
+        canvas {
+            width: 100%;
+            background: white;
+        }
+        textures {
+            display: none;
+        }
+    </style>
+</head>
+<body id="body">
+    <dialog id="pause_menu">
+        paused <br>
+        <button id="unpause_btn">close</button>
+    </dialog>
+    <canvas id="canvas" width="1920" height="1080"></canvas>
+    <script src="./main.js"></script>
+</body>
+</html>

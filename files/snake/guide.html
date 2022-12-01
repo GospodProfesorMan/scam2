@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500;700&display=swap" rel="stylesheet">
+    <title>JS Canvas basics</title>
+    <style>
+        body {
+            background: linear-gradient(160deg, #000, #1e003c, #003245, #3e6990) no-repeat;
+            margin: 0;
+            color: #dddddd;
+            font-family: 'Roboto', sans-serif;
+        }
+        nav {
+            background-color: #000;
+            position: fixed;
+            display: grid;
+            grid-auto-columns: minmax(0, 1fr);
+            grid-auto-flow: column;
+            min-width: 100%;
+        }
+        footer {
+            background-color: #000;
+            text-align: center;
+            max-width: 100%;
+            padding: 1em;
+            font-size: 1.5vh;
+            margin-top: 3em;
+        }
+        a {
+            color: #dddddd;
+            text-decoration: none;
+        }
+        nav a {
+            display: inline-block;
+            text-align: center;
+            padding: 1em;
+            font-size: 1.5vh;
+        }
+        nav a:hover {
+            color: #000;
+            background-color: #fff;
+        }
+        h1 {
+            padding-top: calc(1em + 3vh);
+            text-align: center;
+            margin: 0 0 1em;
+        }
+        h3 {
+            font-size: 3vh;
+            margin: 2em 0 0.3em;
+        }
+        h4 {
+            text-indent: 0;
+            margin-bottom: 0.8em;
+        }
+        .js_highlight {
+            color: #f7df1e;
+        }
+        @media only screen and (min-width: 250mm) {
+            #main {margin: 0 10%;}
+            .paragraph {padding: 0.5em 12%}
+            h1 {font-size: 10vh}
+            pre.dark {margin: 2em 4em !important}
+        }
+        @media only screen and (max-width: 250mm) {
+            #main {margin: 0 2%}
+            .paragraph {padding: 0.5em 5%}
+            h1 {font-size: 6vh}
+            pre.dark {margin: 2em 1em !important}
+        }
+        .toc {
+            font-size: 2vh;
+            padding-left: 3em;
+        }
+        .toc li {
+            margin: 0.5em 0;
+        }
+        .paragraph {
+            margin-left: 2.5em;
+            font-size: 2vh;
+            line-height: 1.3em;
+        }
+        .text-indent {
+            text-indent: 2cm;
+        }
+        .fine-print {
+            font-size: 1.3vh;
+        }
+        .underline {
+            text-decoration: underline;
+        }
+        .text-wrap-image {
+            float: left;
+            margin: 2%;
+            text-indent: 0;
+        }
+        .embed {
+            margin: 3vh auto;
+            text-align: center;
+        }
+        img {
+            max-width: 100%;
+        }
+        .mw20 {max-width: 20%}
+        .mw40 {max-width: 40%}
+        .mw60 {max-width: 60%}
+        pre.dark {
+            background: #000 !important;
+            border-radius: 20px;
+        }
+        iframe {
+            min-width: 70%;
+            aspect-ratio: 16/9;
+        }
+    </style>
+    <link href="/lib/prism_funk.css" rel="stylesheet" />
+</head>
+<body>
+    <nav>
+        <a href="./main.html" target="_blank">TRY FULLSCREEN</a>
+        <a>OTHER GUIDES</a>
+        <a>ABOUT</a>
+        <a>HOME</a>
+    </nav>
+    <div id="main">
+        <h1 id="mainHeading">The basics of <b class="js_highlight">JavaScript</b> canvas</h1>
+        <div id="content">
+            <h3>Table of contents</h3>
+            <ol class="toc">
+                <li><a href="#intro">Intro</a></li>
+                <li><a href="#game-dev-principles">Basic gamedev principles</a></li>
+                <li><a href="#boilerplate">Boilerplate</a></li>
+                <li><a href="#canvas-api">Canvas api</a></li>
+                <li><a href="#coding-game">Coding game mechanics</a></li>
+                <li><a href="#conclusion">Conclusion</a></li>
+            </ol>
+            <h3 id="intro">Intro</h3>
+            <div class="paragraph text-indent">
+                There are many benefits to using javascript canvas for example: simplycity, easy networking, speed,
+                the end product is far easier to distribute. But it is far from the perfect tool for the job as it
+                can still be slow in some cases and it is hard to monetize. Canvas games are great for small presonal/
+                parctice projects or for free to play browser games like agar.io but not much else.
+            </div>
+            <div class="paragraph text-indent">
+                In this tutorial we are going to cover creating a game of snake with JavaScript canvas.
+                Before starting you will need a basic understanding of JavaScript, html and css. For now we will
+                not be using anything alse than an html and a JavaScript file but in the next part of this
+                tutorial we will add multiplayer and make use of a backend. <br>
+                The end product of this tutorial can be seen below:
+            </div>
+            <div class="embed">
+                <iframe name="game_embed" scrolling="no"></iframe><br>
+                <a class="fine-print underline" href="./main.html" target="game_embed">
+                    Click this to try the end product now
+                </a>
+            </div>
+            <h3 id="game-dev-principles">Basic game dev principles</h3>
+            <div class="paragraph text-indent">
+                Before coding a game one needs to understand how a game works. A videogame (after loading) is usually
+                just one infinite loop with some variation depending on the state (ie: running, paused, in menu...).
+                This loop is refered to as the game loop. One iteration of the loop means one frame in the game
+                The loop itself consists of several segments witch can be seen when developing a game
+                with any tool / language.
+                <h4>1. Get time</h4>
+                Games are very time sensitive yet inconsistent due to different hardware and having to
+                do different amounts of operations depending on what's happening. Because of this at the start of
+                each frame we need to get the time it took to execute the previous one. We can use this information
+                for several things like: measuring performance, using it for more consistent movement / physics,
+                capping the fps. Thankfully javascript already caps the fps for us so we don't have to worry about
+                that.
+                <h4>2. Process input / update state</h4>
+                In this part we usually look if the player has pressed any keys or cliked anything and using
+                the time we got from the previous step calculate how much things have changed. This is
+                the part where pretty much all of the games logic is. Surprisingly this step takes very
+                little prcessing time as we deal mostly with numbers witch the CPU is very good at.
+                <h4>3. Draw</h4>
+                The interesting thing about drawing things is that it doesn't actually draw anything it just loads
+                the textures or shapes you want to appear on the screen into a buffer which is then displayed
+                on your monitor. This step takes up the majority of processing time and requires most optimisations.
+                <h4>4. Update display</h4>
+                In this we just call a function that sends the before mentioned buffer to the screen (simplyfication).
+                This is the only time that the player sees anything happen. The process mostly takes a stable amount
+                of time to execute.
+            </div>
+            <h3 id="boilerplate">Boilerplate</h3>
+            <div class="paragraph text-indent">
+                In this section we go over the html and css needed for our game to even show up.
+                For a canvas game we will obviosly be needing a canvas HTML element. The element
+                takes 2 VERY important parameters being height and width. These actually have little
+                to do with it's style but they specify how many by how many units your game will be. <br>
+                Among other things we will need to import our main script that will contain the games code. <br>
+                We also need to make our canvas 100% wide so it fits the screen properly. <br>
+                In order to use textures in our games we need to load them as html images. But we don't need
+                the player seeing all of our spritesheets we will hide them in the invisible textures element <br>
+                I also added a dialog element for the pause menu because I like taking advantage of html but
+                you can always code one ingame <br>
+                In the end your code should look similar to this:
+            </div>
+            <pre class="dark language-html">
+<code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Game&lt;/title&gt;
+    &lt;style&gt;
+        body {
+            background: black;
+            margin: 0;
+        }
+        canvas {
+            width: 100%;
+            background: white;
+            position: absolute;
+        }
+        textures {
+            display: none;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;dialog id="pause_menu"&gt;
+        paused&lt;br&gt;
+        &lt;button id="unpause_btn"&gt;close&lt;/button&gt;
+    &lt;/dialog&gt;
+    &lt;canvas id="canvas" width="1920" height="1080"&gt;&lt;/canvas&gt;
+    &lt;script src="./main.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            <h3 id="canvas-api">The canvas API</h3>
+            <div class="paragraph text-indent">
+                The javascript canvas api is very simple. In this tutoral I will only be mentioning
+                the functions and variables important to us. But you can a list of canvas associated
+                functions <a class="underline js_highlight" href="https://www.w3schools.com/tags/ref_canvas.asp">here</a>
+                <h3>WRITE CONTENT</h3>
+            </div>
+            <h3 id="coding-game">Coding game mechanics</h3>
+            <div class="paragraph text-indent">
+                <h3>CODE GAME BEFORE WRITING</h3>
+            </div>
+            <pre class="dark language-js">
+<code class="language-js">const CANVAS = document.getElementById("canvas")
+const CTX = CANVAS.getContext("2d")
+let lastRender = 0
+
+if(Math.min(window.innerWidth / 1920, window.innerHeight / 1080) &lt; 1){
+    console.log('assuming low res screen');
+    CTX.imageSmoothingEnabled = true; // turn it on for low res screens
+}else{
+    console.log('assuming high res screen');
+    CTX.imageSmoothingEnabled = false; // turn it off for high res screens.
+}
+
+//methods
+const pause = () => {
+    paused = !paused
+    if (paused) pause_menu.showModal()
+    else pause_menu.close()
+    console.log("game is paused");
+}
+const handle_keydown = (e) => {
+    if (paused) return
+    if (e.keyCode &lt; 41 && e.keyCode > 36) {
+        direction = e.keyCode
+        return
+    }
+    pause()
+}
+
+//textures
+CTX.font = "50px Arial";
+
+//game variables
+let apple = [20, 10]
+//56 + (16 by 30 grid)
+let snake = [[15, 7], [15, 8], [15, 9]]
+let score = 0
+let ms_per_tile = 500
+let direction = 40
+let ms_before_moving = 500
+
+//controls / html elements
+let paused = false
+const pause_menu = document.getElementById('pause_menu')
+document.getElementById("unpause_btn").onclick = pause
+document.getElementById("body").addEventListener("keydown", handle_keydown);
+
+//main
+function update(progress) {
+    // return when paused
+    if (paused) return
+    // output fps and rond the progress for performance
+    console.log("fps:", Math.round(1000/progress));
+    //round progress for performance
+    const progressRound = Math.round(progress)
+
+    ms_before_moving -= progressRound
+    if (ms_before_moving &lt;= 0) {
+        ms_before_moving = ms_per_tile
+        //move
+        const el = snake[snake.length-1]
+        switch (direction) {
+            case 38:
+                snake.push([el[0], el[1] - 1])
+                break;
+            case 39:
+                snake.push([el[0] + 1, el[1]])
+                break;
+            case 40:
+                snake.push([el[0], el[1] + 1])
+                break;
+            case 37:
+                snake.push([el[0] - 1, el[1]])
+                break;
+            default:
+                break;
+        }
+        //check for apples / death
+        let hit_apple = false
+        for (let i = 0; i &lt; snake.length; i++) {
+            const el = snake[i];
+            if (el[0] === apple[0] && el[1] === apple[1]) {
+                hit_apple = true
+                break
+            }
+        }
+        if (hit_apple) {
+            ms_per_tile = ms_per_tile - (ms_per_tile>>4)
+            let hit_snake = true
+            while (hit_snake) {
+                hit_snake = false
+                apple = [Math.floor(Math.random() * 29) + 1, Math.floor(Math.random() * 15) + 1]
+                for (let i = 0; i &lt; snake.length; i++) {
+                    const el = snake[i];
+                    if (el[0] === apple[0] && el[1] === apple[1]) {
+                        hit_snake = true
+                        break
+                    }
+                }
+            }
+        } else {
+            const element = snake.shift()
+            CTX.clearRect((element[0]&lt;&lt;6) + 4, (element[1]&lt;&lt;6) + 60, 56, 56)
+        }
+        let hit_self = false
+        for (let i = 0; i &lt; snake.length - 1; i++) {
+            const el = snake[i];
+            if (el[0] === snake[snake.length-1][0] && el[1] === snake[snake.length-1][1]) {
+                hit_self = true
+                break
+            }
+        }
+        let hit_border = snake[snake.length-1][0] &lt; 0 || snake[snake.length-1][0] > 29 ||
+            snake[snake.length-1][1] &lt; 0 || snake[snake.length-1][1] > 15
+        if (hit_self || hit_border) {
+            snake = [[15, 7], [15, 8], [15, 9]]
+            apple = [20, 10]
+            score = 0
+            ms_per_tile = 500
+            direction = 40
+            ms_before_moving = 500
+        }
+    }
+
+    score += progressRound
+}
+
+function draw() {
+    if (paused) return
+    // clear canvas
+    CTX.clearRect(0, 0, CANVAS.width, CANVAS.height)
+    CTX.fillStyle = "#000000"
+    CTX.fillText(Math.floor(score>>5), 128, 50);
+
+    CTX.fillStyle = "#00FF00";
+    CTX.beginPath();
+    for (let i = 1; i &lt; 30; i++) {
+        CTX.moveTo(i&lt;&lt;6, 56);
+        CTX.lineTo(i&lt;&lt;6, 1080);
+    }
+    for (let i = 0; i &lt; 16; i++) {
+        CTX.moveTo(0, 56 + (i&lt;&lt;6));
+        CTX.lineTo(1920, 56 + (i&lt;&lt;6));
+    }
+    CTX.stroke();
+
+    for (let i = 0; i &lt; snake.length; i++) {
+        const el = snake[i];
+        CTX.fillRect((el[0]&lt;&lt;6) + 4, (el[1]&lt;&lt;6) + 60, 56, 56)
+    }
+
+    CTX.fillStyle = "#FF0000";
+    CTX.fillRect((apple[0]&lt;&lt;6) + 4, (apple[1]&lt;&lt;6) + 60, 56, 56)
+}
+
+function loop(timestamp) {
+    //get time
+    let progress = timestamp - lastRender
+
+    //update using time
+    update(progress)
+
+    //draw
+    draw()
+
+    //save time
+    lastRender = timestamp
+
+    //tell browser to render again
+    window.requestAnimationFrame(loop)
+}
+//run game
+window.onload = window.requestAnimationFrame(loop)
+</code></pre>
+            <h3 id="conclusion">Conclusion</h3>
+            <div class="paragraph text-indent">
+                <h3>CODE GAME BEFORE WRITING</h3>
+            </div>
+        </div>
+    </div>
+    <footer>
+        Viacheslav Telelyukhin 2022 (no rights, distribute as you wish)
+    </footer>
+    <script src="/lib/prism_funk.js"></script>
+</body>
+</html>
+<!-- Indent text properly -->
