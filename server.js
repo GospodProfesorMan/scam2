@@ -7,6 +7,8 @@ const url_remaps = {
 const server = http.createServer((req, res) => {
   let page = req.url
   if (url_remaps[page]) page = url_remaps[page]
+  if (page.endsWith(".css")) res.setHeader("content-type", "text/css")
+  if (page.endsWith(".js")) res.setHeader("content-type", "text/javascript")
   let file = fs.createReadStream('./files'+page)
   file.on('error', function(err) {
     console.log(err);

@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta content="JavaScript canvas basics" property="og:title" />
+    <meta content="Learn how to create a simple game with javascript" property="og:description" />
+    <meta content="https://simpleembedshare.onrender.com/snake/guide.html" property="og:url" />
+    <meta content="https://simpleembedshare.onrender.com/img/embed.png" property="og:image" />
+    <meta content="#000" data-react-helmet="true" name="theme-color" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500;700&display=swap" rel="stylesheet">
@@ -28,7 +35,7 @@
             text-align: center;
             max-width: 100%;
             padding: 1em;
-            font-size: 1.5vh;
+            font-size: 2vh;
             margin-top: 3em;
         }
         a {
@@ -55,7 +62,6 @@
             margin: 2em 0 0.3em;
         }
         h4 {
-            text-indent: 0;
             margin-bottom: 0.8em;
         }
         .js_highlight {
@@ -65,13 +71,13 @@
             #main {margin: 0 10%;}
             .paragraph {padding: 0.5em 12%}
             h1 {font-size: 10vh}
-            pre.dark {margin: 2em 4em !important}
+            pre.separate {margin: 2em 4em !important}
         }
         @media only screen and (max-width: 250mm) {
             #main {margin: 0 2%}
             .paragraph {padding: 0.5em 5%}
             h1 {font-size: 6vh}
-            pre.dark {margin: 2em 1em !important}
+            pre.separate {margin: 2em 1em !important}
         }
         .toc {
             font-size: 2vh;
@@ -95,8 +101,9 @@
             text-decoration: underline;
         }
         .text-wrap-image {
-            float: left;
-            margin: 2%;
+            float: right;
+            margin: 0 1%;
+            padding-top: 1%;
             text-indent: 0;
         }
         .embed {
@@ -107,15 +114,26 @@
             max-width: 100%;
         }
         .mw20 {max-width: 20%}
+        .mw30 {max-width: 30%}
         .mw40 {max-width: 40%}
+        .mw50 {max-width: 50%}
         .mw60 {max-width: 60%}
         pre.dark {
             background: #000 !important;
             border-radius: 20px;
         }
+        .small {
+            font-size: 0.6em !important;
+        }
         iframe {
             min-width: 70%;
             aspect-ratio: 16/9;
+            border: #000 10px solid;
+            border-radius: 10px;
+            background: #000;
+        }
+        p {
+            margin: 0;
         }
     </style>
     <link href="/lib/prism_funk.css" rel="stylesheet" />
@@ -128,7 +146,7 @@
         <a>HOME</a>
     </nav>
     <div id="main">
-        <h1 id="mainHeading">The basics of <b class="js_highlight">JavaScript</b> canvas</h1>
+        <h1 id="mainHeading">The basics of <span class="js_highlight">JavaScript</span> canvas</h1>
         <div id="content">
             <h3>Table of contents</h3>
             <ol class="toc">
@@ -137,7 +155,7 @@
                 <li><a href="#boilerplate">Boilerplate</a></li>
                 <li><a href="#canvas-api">Canvas api</a></li>
                 <li><a href="#coding-game">Coding game mechanics</a></li>
-                <li><a href="#conclusion">Conclusion</a></li>
+                <li><a href="#conclusion">Next steps</a></li>
             </ol>
             <h3 id="intro">Intro</h3>
             <div class="paragraph text-indent">
@@ -160,48 +178,48 @@
                 </a>
             </div>
             <h3 id="game-dev-principles">Basic game dev principles</h3>
-            <div class="paragraph text-indent">
-                Before coding a game one needs to understand how a game works. A videogame (after loading) is usually
+            <div class="paragraph">
+                <p class="text-indent">Before coding a game one needs to understand how a game works. A videogame (after loading) is usually
                 just one infinite loop with some variation depending on the state (ie: running, paused, in menu...).
                 This loop is refered to as the game loop. One iteration of the loop means one frame in the game
                 The loop itself consists of several segments witch can be seen when developing a game
-                with any tool / language.
+                with any tool / language.</p>
                 <h4>1. Get time</h4>
-                Games are very time sensitive yet inconsistent due to different hardware and having to
+                <p class="text-indent">Games are very time sensitive yet inconsistent due to different hardware and having to
                 do different amounts of operations depending on what's happening. Because of this at the start of
                 each frame we need to get the time it took to execute the previous one. We can use this information
                 for several things like: measuring performance, using it for more consistent movement / physics,
                 capping the fps. Thankfully javascript already caps the fps for us so we don't have to worry about
-                that.
+                that.</p>
                 <h4>2. Process input / update state</h4>
-                In this part we usually look if the player has pressed any keys or cliked anything and using
+                <p class="text-indent">In this part we usually look if the player has pressed any keys or cliked anything and using
                 the time we got from the previous step calculate how much things have changed. This is
                 the part where pretty much all of the games logic is. Surprisingly this step takes very
-                little prcessing time as we deal mostly with numbers witch the CPU is very good at.
+                little prcessing time as we deal mostly with numbers witch the CPU is very good at.</p>
                 <h4>3. Draw</h4>
-                The interesting thing about drawing things is that it doesn't actually draw anything it just loads
+                <p class="text-indent">The interesting thing about drawing things is that it doesn't actually draw anything it just loads
                 the textures or shapes you want to appear on the screen into a buffer which is then displayed
-                on your monitor. This step takes up the majority of processing time and requires most optimisations.
+                on your monitor. This step takes up the majority of processing time and requires most optimisations.</p>
                 <h4>4. Update display</h4>
-                In this we just call a function that sends the before mentioned buffer to the screen (simplyfication).
+                <p class="text-indent">In this we just call a function that sends the before mentioned buffer to the screen (simplyfication).
                 This is the only time that the player sees anything happen. The process mostly takes a stable amount
-                of time to execute.
+                of time to execute.</p>
             </div>
             <h3 id="boilerplate">Boilerplate</h3>
             <div class="paragraph text-indent">
-                In this section we go over the html and css needed for our game to even show up.
+                <p class="text-indent">In this section we go over the html and css needed for our game to even show up.
                 For a canvas game we will obviosly be needing a canvas HTML element. The element
                 takes 2 VERY important parameters being height and width. These actually have little
-                to do with it's style but they specify how many by how many units your game will be. <br>
-                Among other things we will need to import our main script that will contain the games code. <br>
-                We also need to make our canvas 100% wide so it fits the screen properly. <br>
+                to do with it's style but they specify how many by how many units your game will be.
+                Among other things we will need to import our main script that will contain the games code.
+                <p class="text-indent">We also need to make our canvas 100% wide so it fits the screen properly.
                 In order to use textures in our games we need to load them as html images. But we don't need
-                the player seeing all of our spritesheets we will hide them in the invisible textures element <br>
-                I also added a dialog element for the pause menu because I like taking advantage of html but
-                you can always code one ingame <br>
+                the player seeing all of our spritesheets we will hide them in the invisible textures element</p>
+                <p class="text-indent">I also added a dialog element for the pause menu because I like taking advantage of html but
+                you can always code one ingame</p>
                 In the end your code should look similar to this:
             </div>
-            <pre class="dark language-html">
+            <pre class="dark separate language-html">
 <code class="language-html">&lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 &lt;head&gt;
@@ -219,9 +237,6 @@
             background: white;
             position: absolute;
         }
-        textures {
-            display: none;
-        }
     &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
@@ -234,28 +249,125 @@
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
             <h3 id="canvas-api">The canvas API</h3>
-            <div class="paragraph text-indent">
-                The javascript canvas api is very simple. In this tutoral I will only be mentioning
+            <div class="paragraph">
+                <p class="text-indent">The javascript canvas api is very simple. In this tutoral I will mostly be mentioning
                 the functions and variables important to us. But you can a list of canvas associated
-                functions <a class="underline js_highlight" href="https://www.w3schools.com/tags/ref_canvas.asp">here</a>
-                <h3>WRITE CONTENT</h3>
+                functions <a class="underline js_highlight" href="https://www.w3schools.com/tags/ref_canvas.asp">here</a></p>
+                <p class="text-indent">In order to interact with the canvas we need 2 main objects: the canvas and the context (ctx).
+                The canvas is used for interacting with the html element. The context is used to interact
+                with the image displayed on the canvas. </p><br> In this section we will cover:
+                <ul>
+                    <li>drawing rectangles</li>
+                    <li>color</li>
+                    <li>drawing images</li>
+                    <li>writing text</li>
+                    <li>drawing lines</li>
+                    <li>requestAnimationFrame</li>
+                </ul>
+                <span class="js_highlight">Important: all ctx/canvas properties and functions are case sensitive</span><br>
+                
+                <h4>drawing rectangles</h4>
+                    <img src="/img/example2.png" class="text-wrap-image mw30">
+                    <p class="text-indent">To draw a rectangle we need to use the strokeRect or fillRect methods. Each takes 4 parameters
+                    starting x, starting y, x width, y width. To remember this easier remember that when passing
+                    coordinates to a function the X is always first. These numbers are given in ingame units defined
+                    prior in the canvas html element. If your rectangle has proportions not correspoding to the
+                    parameters you gave the function it might be because your canvas width and height parameters
+                    are different form its actual dimentions it the html document. You can also erase anything you
+                    drew on the canvas using the clearRect method. It is usually used to wipe the enitre canvas.</p>
+                    Example of filling and stroking a rectangle:
+                    <pre class="dark language-js small">
+<code class="language-js">const CTX = document.getElementById("canvas").getContext("2d")
+CTX.fillRect(128, 128, 256, 256)
+CTX.strokeRect(512, 128, 256, 256)
+CTX.clearRect(128, 128, 128, 128)</code></pre>
+
+                <h4>color</h4>
+                    <img src="/img/example1.png" class="text-wrap-image mw20"><br>
+                    <p class="text-indent">We can change the color we are using to draw with 3 different properties: fillStyle, strokeStyle, shadowColor.
+                    each is used for it's respective way of drawing. We can also use css to change the background color or the canvas.</p>
+                    Example of changing fillStyle and using a shadow:
+                    <pre class="dark language-js small">
+<code class="language-js">const CTX = document.getElementById("canvas").getContext("2d")
+CTX.fillStyle = "#a3f"
+CTX.fillRect(128, 128, 256, 256)
+CTX.fillStyle = "#f3a"
+CTX.shadowColor = "#f3a"
+CTX.shadowBlur = 100
+CTX.fillRect(512, 128, 256, 256)</code></pre>
+
+                <h4>drawing images</h4>
+                    <p class="text-indent">In order to draw an image we use the drawImage method. It takes 3 main parameters source image, x, y.
+                    It also has optional parameters used to strech or clip the image but it is not best practice to use them because
+                    it is slower than just drawing an image you applied the effects to before loading it. To import an image
+                    to our script we have to load it in html then get it with document.getelementbyid or a simmilar funtion.
+                    You must be careful for the image to load first and only then execute your code, you can do that by using
+                    window.onload</p>
+                    Exaple of srawing an image with id="image"
+                    <pre class="dark language-js small"><code class="language-js">const CTX = document.getElementById("canvas").getContext("2d")
+Img = document.getElementById("image")
+CTX.drawImage(Img, 128, 128)</code></pre>
+
+                <h4>writing text</h4>
+                    <img src="/img/example3.png" class="text-wrap-image mw40">
+                    <p class="text-indent">For writing text we use a method and property. We use CTX.font to set the size and style of text we
+                    are going to write and the fillText / strokeText method to write it. The font properly is very simmilar
+                    to the css font-style property. When we set the font size in pixels it uses ingame units. 
+                    fillText and strokeText use the fillStyle and strokeStyle for their color</p>
+                    Example of writing text to canvas:
+                    <pre class="dark language-js small"><code class="language-js">const CTX = document.getElementById("canvas").getContext("2d")
+CTX.font = "50px Courier"
+CTX.fillStyle = "#7af"
+CTX.fillText("Hello World!", 128, 128)</code></pre>
+
+                <h4>drawing lines</h4>
+                    <img src="/img/example4.png" class="text-wrap-image mw20">
+                    <p class="text-indent">When drawing lines we must imagine to have a sort of pen that we are doing it with.
+                    To start drawing we need to use the begingPath method. Then we can move the pen with moveTo
+                    which takes 1 pair of coordinates. To draw a line we use lineTo which does the same thing
+                    but it draws a line while moving. To have our line show up we need to use stroke().
+                    The width of the lines can be modified with the lineWidth property.</p>
+                    Example:
+                    <pre class="dark language-js small"><code class="language-js">const CTX = document.getElementById("canvas").getContext("2d")
+CTX.beginPath()
+CTX.moveTo(128, 128)
+CTX.lineTo(128, 256)
+CTX.lineTo(256, 128)
+CTX.stroke()</code></pre>
+
+                <h4>requestAnimationFrame</h4>
+                    <p class="text-indent">Every game needs to have limited fps otherwise they would be unreasonably CPU intense and
+                    unstable. Thankfully when working with canvas this is done for us. By calling
+                    window.requestAnimationFrame and passing it our game loop funtion at the and of our game
+                    loop the browser will limit the loops frequency to your screen frequency (usually 60Hz or 144Hz)
+                    or another lower number. requestAnimationFrame will also pass the function we give it a timestamp
+                    (in milliseconds) we can use to calculate how much time has passed since the last render.</p>
+                    Example of firing mechanism for canvas game:
+                    <pre class="dark language-js small"><code class="language-js">let lastRender = 0
+let progress
+function loop(timestamp) {
+    progress = timestamp - lastRender
+
+    update(progress)
+    draw()
+    
+    lastRender = timestamp
+    window.requestAnimationFrame(loop)
+}
+window.onload = window.requestAnimationFrame(loop)</code></pre>
+
             </div>
             <h3 id="coding-game">Coding game mechanics</h3>
-            <div class="paragraph text-indent">
-                <h3>CODE GAME BEFORE WRITING</h3>
+            <div class="paragraph">
+                <p class="js_highlight text-indent">
+                    The code below is very unoptimised and is only meant to showcase how games usually tend
+                    to work or be used as a reference in case you are stuck while coding your own version.
+                </p>
             </div>
-            <pre class="dark language-js">
+            <pre class="dark language-js separate">
 <code class="language-js">const CANVAS = document.getElementById("canvas")
 const CTX = CANVAS.getContext("2d")
 let lastRender = 0
-
-if(Math.min(window.innerWidth / 1920, window.innerHeight / 1080) &lt; 1){
-    console.log('assuming low res screen');
-    CTX.imageSmoothingEnabled = true; // turn it on for low res screens
-}else{
-    console.log('assuming high res screen');
-    CTX.imageSmoothingEnabled = false; // turn it off for high res screens.
-}
 
 //methods
 const pause = () => {
@@ -346,7 +458,6 @@ function update(progress) {
             }
         } else {
             const element = snake.shift()
-            CTX.clearRect((element[0]&lt;&lt;6) + 4, (element[1]&lt;&lt;6) + 60, 56, 56)
         }
         let hit_self = false
         for (let i = 0; i &lt; snake.length - 1; i++) {
@@ -418,16 +529,18 @@ function loop(timestamp) {
 //run game
 window.onload = window.requestAnimationFrame(loop)
 </code></pre>
-            <h3 id="conclusion">Conclusion</h3>
+            <h3 id="conclusion">Next steps</h3>
             <div class="paragraph text-indent">
-                <h3>CODE GAME BEFORE WRITING</h3>
+                The game we made in this tutorial is rather subpar. But that will change over the next few tutorials
+                Where we cover optimisation, networking, scaling, graphics and more. <br><br>
+                Unfortunatly they are not written yet.
             </div>
         </div>
     </div>
     <footer>
-        Viacheslav Telelyukhin 2022 (no rights, distribute as you wish)
+        Viacheslav Telelyukhin 2022 (no rights, distribute as you wish) <br>
+        Reach me at viacheslav.telelyukhin@students.vegova.si
     </footer>
     <script src="/lib/prism_funk.js"></script>
 </body>
 </html>
-<!-- Indent text properly -->

@@ -28,6 +28,7 @@ const handle_keydown = (e) => {
 
 //textures
 CTX.font = "50px Arial";
+CTX.strokeStyle = '#FFF';
 
 //game variables
 let apple = [20, 10]
@@ -99,7 +100,6 @@ function update(progress) {
             }
         } else {
             const element = snake.shift()
-            CTX.clearRect((element[0]<<6) + 4, (element[1]<<6) + 60, 56, 56)
         }
         let hit_self = false
         for (let i = 0; i < snake.length - 1; i++) {
@@ -128,7 +128,7 @@ function draw() {
     if (paused) return
     // clear canvas
     CTX.clearRect(0, 0, CANVAS.width, CANVAS.height)
-    CTX.fillStyle = "#000000"
+    CTX.fillStyle = "#FFF"
     CTX.fillText(Math.floor(score>>5), 128, 50);
 
     CTX.fillStyle = "#00FF00";
