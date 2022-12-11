@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>upload file</title>
+    <script>
+        function func() {
+            fetch("/" + document.getElementById("path").value, {
+                method: "POST",
+                body: document.getElementById("file").files[0],
+            })
+        }
+    </script>
+</head>
+<body>
+    <input placeholder="password"><br>
+    <input placeholder="path" id="path"><br>
+    <input type="file" id="file"><br>
+    <button onclick="func()">upload</button>
+</body>
+</html>
