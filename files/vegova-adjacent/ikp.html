@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500;700&display=swap" rel="stylesheet">
+    <link href="/lib/prism_funk.css" rel="stylesheet" />
+    <title>A. Pene moodle vaje</title>
+    <script>
+        function setIframe(id) {
+            document.getElementById(id+"preview").style.backgroundColor = "#fff"
+            document.getElementById(id+"preview").src = "data:text/html;charset=utf-8," + document.getElementById(id+"code").textContent
+        }
+        function saveCode(id) {
+            var tmplink = document.createElement('a');
+            tmplink.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(document.getElementById(id+"code").textContent));
+            tmplink.setAttribute('download', "IKP Vaja "+id[1]+"."+id[2]);
+            if (document.createEvent) {
+                var event = document.createEvent('MouseEvents');
+                event.initEvent('click', true, true);
+                tmplink.dispatchEvent(event);
+            }
+            else {
+                tmplink.click();
+            }
+        }
+        function highlight(element) {
+            element.innerHTML = Prism.highlight(element.textContent, Prism.languages.html, "html");
+        }
+        function hideIframe(id) {
+            document.getElementById(id+"preview").classList.toggle("invisible");
+
+        }
+    </script>
+    <style>
+        body {
+            background-color: #000;
+            margin: 0;
+            color: #fff;
+            font-family: 'Roboto', sans-serif;
+        }
+        nav {
+            background-color: #000;
+            position: fixed;
+            display: grid;
+            grid-auto-columns: minmax(0, 1fr);
+            grid-auto-flow: column;
+            min-width: 100%;
+            z-index: 2;
+        }
+        footer {
+            background-color: #000;
+            text-align: center;
+            max-width: 100%;
+            padding: 1em;
+            font-size: 2vh;
+            margin-top: 1em;
+        }
+        a {
+            color: #dddddd;
+            text-decoration: none;
+        }
+        nav a {
+            display: inline-block;
+            text-align: center;
+            padding: 1em;
+            font-size: 1.5vh;
+        }
+        nav a:hover {
+            color: #000;
+            background-color: #fff;
+        }
+        h1 {
+            padding-top: calc(1em + 3vh);
+            text-align: center;
+            margin: 0 0 1em;
+        }
+        h3 {
+            font-size: 3vh;
+            margin: 1.5em 0 0.3em;
+            padding-top: 0.5em;
+        }
+        h4 {
+            margin-bottom: 0.8em;
+        }
+        .js_highlight {
+            color: #f7df1e;
+        }
+        @media only screen and (min-width: 250mm) {
+            #main {margin: 0 10%;}
+            .paragraph {padding: 0.5em 12%; margin-left: 2.5em;}
+            h1 {font-size: 10vh}
+            pre.separate {margin: 2em 4em !important}
+        }
+        @media only screen and (max-width: 250mm) {
+            #main {margin: 0 2%}
+            .paragraph {padding: 0.5em 0.5em; margin-left: 1em;}
+            h1 {font-size: 6vh}
+            pre.separate {margin: 2em 1em !important}
+        }
+        .toc {
+            padding-left: 1em;
+            font-size: 2vh;
+        }
+        .toc li {
+            margin: 0.5em 0;
+        }
+        .paragraph {
+            font-size: 2vh;
+            line-height: 1.3em;
+        }
+        .text-indent {
+            text-indent: 2cm;
+        }
+        .fine-print {
+            font-size: 1.3vh;
+        }
+        .underline {
+            text-decoration: underline;
+        }
+        img {
+            max-width: 100%;
+        }
+        pre {
+            border-radius: 20px;
+        }
+        iframe {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border: #000 10px solid;
+            border-radius: 10px;
+            background: #000;
+        }
+        p {
+            margin: 0;
+        }
+        .bleed {
+            --bgcolor: #000;
+            /* prefered colors: #e6902b, #2270b3, 3af variants */
+            box-shadow: 0 0 0 100vmax var(--bgcolor);
+            background-color: var(--bgcolor);
+            clip-path: inset(0 -100vmax);
+            padding-bottom: 2em;
+        }
+        button {
+            margin: 0.5em 1em 0.5em 0;
+            font-size: inherit;
+            font-family: inherit;
+            background: #000;
+            color: #fff;
+            border: none;
+            border-radius: 100vmax;
+            padding: 0.3em 0.6em;
+        }
+        button:hover {
+            background: #fff;
+            color: #000;
+        }
+        button:active {
+            background-color: #ccc;
+        }
+        :focus-visible {
+            outline: none;
+        }
+        .invisible {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a>OTHER GUIDES</a>
+        <a>ABOUT</a>
+        <a>HOME</a>
+    </nav>
+    <div id="main">
+        <h1 id="mainHeading">IKP <span class="js_highlight">HTML</span> vaje 1. letnik</h1>
+        <div id="content">
+            <h3>Vsebina</h3>
+            <section>
+                <div class="paragraph">
+                    <ul class="toc">
+                    <li><a href="#v51">Vaja 5.1</a></li>
+                    <li><a href="#v52">Vaja 5.2</a></li>
+                    <li><a href="#v53">Vaja 5.3</a></li>
+                    <li><a href="#v54">Vaja 5.4</a></li>
+                    <li><a href="#v55">Vaja 5.5</a></li>
+                    <li><a href="#v61">Vaja 6.1</a></li>
+                    <li><a href="#v62">Vaja 6.2</a></li>
+                    <li><a href="#v63">Vaja 6.3</a></li>
+                    <li><a href="#v64">Vaja 6.4</a></li>
+                    <li><a href="#v65">Vaja 6.5</a></li>
+                    <li><a href="#v66">Vaja 6.6</a></li>
+                    <li><a href="#v67">Vaja 6.7</a></li>
+                    <li><a href="#v68">Vaja 6.8</a></li>
+                    <li><a href="#v69">Vaja 6.9</a></li>
+                </ul>
+            </div>
+            </section>
+            <section class="bleed" style="--bgcolor:#e6902b">
+                <h3 id="v51">Vaja 5.1:</h3>
+                <div class="paragraph">
+                    Ustvarite spletno stran, ki vključuje dva seznama. En naj bo oštevilčen in naj našteva sadeže, ki se začnejo na "m". Drugi naj bo neoštevilčen in naj našteva živali, ki se začenjo na "k". Oštevilčen seznam naj ima namesto arabskih rimska števila.
+                </div>
+                <pre class="language-html"><code id="v51code" onfocusout="highlight(this)" contenteditable>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+    &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="ie=edge" /&gt;
+    &lt;title&gt;Seznam sadja in živali&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    &lt;h2&gt;Sadeži z začetnico m&lt;/h2&gt;
+    &lt;ol type="I"&gt;
+        &lt;li&gt;marelica&lt;/li&gt;
+        &lt;li&gt;mandlji&lt;/li&gt;
+        &lt;li&gt;mandarine&lt;/li&gt;
+        &lt;li&gt;mango&lt;/li&gt;
+        &lt;li&gt;melona&lt;/li&gt;
+        &lt;li&gt;malina&lt;/li&gt;
+        &lt;li&gt;mameja&lt;/li&gt;
+        &lt;li&gt;marakuja&lt;/li&gt;
+    &lt;/ol&gt;
+    &lt;h2&gt;Živali z začetnico k&lt;/h2&gt;
+    &lt;ul&gt;
+        &lt;li&gt;kenuru&lt;/li&gt;
+        &lt;li&gt;koala&lt;/li&gt;
+        &lt;li&gt;krava&lt;/li&gt;
+        &lt;li&gt;konj&lt;/li&gt;
+        &lt;li&gt;krastača&lt;/li&gt;
+        &lt;li&gt;kit&lt;/li&gt;
+        &lt;li&gt;kljunaš&lt;/li&gt;
+        &lt;li&gt;krokodil&lt;/li&gt;
+        &lt;li&gt;karakal&lt;/li&gt;
+        &lt;li&gt;karibu&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                <button id="v51run" onclick="setIframe(this.id.substring(0, 3))">Zagon</button>
+                <button id="v51save" onclick="saveCode(this.id.substring(0, 3))">Shrani kot datoteko</button>
+                <button id="v51run" onclick="hideIframe(this.id.substring(0, 3))">Skrij predpogled</button>
+                <iframe id="v51preview"></iframe>
+            </section>
+            <section class="bleed" style="--bgcolor:#2270b3">
+                <h3 id="v52">Vaja 5.2:</h3>
+                <div class="paragraph">
+                    Ustvarite spletno stran, ki vsebuje tri slike poljubnih mest in poleg njih povezave do opisa na wikipediji.
+                </div>
+                <pre class="language-html"><code id="v52code" onfocusout="highlight(this)" contenteditable>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+    &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+    &lt;link rel="stylesheet" href="styles.css" /&gt;
+    &lt;title&gt;Slike&lt;/title&gt;
+    &lt;style&gt;
+        img {
+            width: 30vh;
+            height: 30vh;
+            object-fit: cover;
+        }
+        a {
+            font-size: 3vh;
+        }
+    &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    &lt;img
+        src="https://trekhunt.com/en/content/images/size/w1600/2020/12/ljubljana.webp"
+        alt="Ljubljana"
+    /&gt;
+    &lt;a href="https://sl.wikipedia.org/wiki/Ljubljana"&gt;Wikipedija&lt;/a&gt;&lt;br /&gt;
+    &lt;img
+        src="https://www.nadlani.si/wp-content/uploads/2022/05/Portoro%C5%BE-je-slovensko-obmorsko-mesto-ki-ponuja-kopico-zanimivosti-in-dejavnosti-810x370.jpg"
+        alt="Portorož"
+    /&gt;
+    &lt;a href="https://sl.wikipedia.org/wiki/Portorož"&gt;Wikipedija&lt;/a&gt;&lt;br /&gt;
+    &lt;img
+        src="https://upload.wikimedia.org/wikipedia/commons/7/75/19-03-03-Maribor-RalfR-DJI_0444.jpg"
+        alt="Maribor"
+    /&gt;
+    &lt;a href="https://sl.wikipedia.org/wiki/Maribor"&gt;Wikipedija&lt;/a&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                <button id="v52run" onclick="setIframe(this.id.substring(0, 3))">Zagon</button>
+                <button id="v52save" onclick="saveCode(this.id.substring(0, 3))">Shrani kot datoteko</button>
+                <button id="v52run" onclick="hideIframe(this.id.substring(0, 3))">Skrij predpogled</button>
+                <iframe id="v52preview"></iframe>
+            </section>
+            <section class="bleed" style="--bgcolor:#e6902b">
+                <h3 id="v53">Vaja 5.3:</h3>
+                <div class="paragraph">
+                    Ustvarite tabelo velikosti 8x8 in z njo ustvarite šahovnico. To pomeni, da izmenjujete belo in črno za ozadje dokler ne zapolnite celotne šahovnice. Tabeli podaj tudi naslov "šahovnica".
+                </div>
+                <pre class="language-html"><code id="v53code" onfocusout="highlight(this)" contenteditable>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+    &lt;link rel="stylesheet" href="styles.css" /&gt;
+    &lt;title&gt;Šahovnica&lt;/title&gt;
+    &lt;style&gt;
+    table{
+        border-collapse: collapse;
+    }
+    table {
+        border: 2px solid black;
+    }
+    tr, td {
+        height: 2.5vh;
+        width: 2.5vh;
+    }
+    table.center {
+          margin:auto;
+        }
+    tr:nth-of-type(even) td:nth-of-type(odd),
+    tr:nth-of-type(odd) td:nth-of-type(even){
+        background-color:white;
+    }
+    tr:nth-of-type(even) td:nth-of-type(even),
+    tr:nth-of-type(odd) td:nth-of-type(odd)
+    {
+        background-color:black;
+    }
+    h1{
+        text-align:center;
+    }    
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;table border="0" cellpadding="0" class="center"&gt;
+        &lt;h1&gt;Šahovnica&lt;/h1&gt;
+    &lt;tr&gt;
+        &lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;td&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                <button id="v53run" onclick="setIframe(this.id.substring(0, 3))">Zagon</button>
+                <button id="v53save" onclick="saveCode(this.id.substring(0, 3))">Shrani kot datoteko</button>
+                <button id="v53run" onclick="hideIframe(this.id.substring(0, 3))">Skrij predpogled</button>
+                <iframe id="v53preview"></iframe>
+            </section>
+            <section class="bleed" style="--bgcolor:#2270b3">
+                <h3 id="v54">Vaja 5.4:</h3>
+                <div class="paragraph">
+                    Oblikuj tabelo, kjer imenujete 8 mest Slovenije in zraven njih napišete število prebivalcev. V zadnjem stolpcu tabele vključite slike posameznega mesta.
+                </div>
+                <pre class="language-html"><code id="v54code" onfocusout="highlight(this)" contenteditable>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+    &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+    &lt;link rel="stylesheet" href="styles.css" /&gt;
+    &lt;title&gt;Mesta&lt;/title&gt;
+    &lt;style&gt;
+        h1 {
+            text-align: center;
+        }
+        table {
+            margin: auto;
+        }
+        td, th {
+            font-size: 3vh;
+            outline: 2px black solid;
+            width: 30vw;
+            text-align: center;
+        }
+        img {
+            height: 30vw;
+            width: 30vw;
+            object-fit: cover;
+        }
+    &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    &lt;h1&gt;Mesta&lt;/h1&gt;
+    &lt;table&gt;
+        &lt;tr&gt;
+        &lt;th&gt;Ime mesta&lt;/th&gt;
+        &lt;th&gt;Št. prebivalcev&lt;/th&gt;
+        &lt;th&gt;Slika mesta&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+        &lt;td&gt;Ljubljana&lt;/td&gt;
+        &lt;td&gt;279.631&lt;/td&gt;
+        &lt;td&gt;
+            &lt;img
+            src="http://t3.gstatic.com/licensed-image?q=tbn:ANd9GcS9ALzNyW6fbVJo05kaQ2lseHV7mCjNx4iSa-07FRZxFDcFXztDbwgSJaQFytrrS73v"
+            alt="Ljubljana"
+            /&gt;
+        &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+        &lt;td&gt;Maribor&lt;/td&gt;
+        &lt;td&gt;94.370&lt;/td&gt;
+        &lt;td&gt;
+            &lt;img
+            src="http://t1.gstatic.com/licensed-image?q=tbn:ANd9GcQwOHWd0dkUvU-DL2rKmK1FkM4TFeBUnvbo1ANUzz-HKuXdR40P0VN24nMqLWImyZVm"
+            alt="Maribor"
+            /&gt;
+        &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+        &lt;td&gt;Kranj&lt;/td&gt;
+        &lt;td&gt;37.941&lt;/td&gt;
+        &lt;td&gt;
+            &lt;img
+            src="http://t3.gstatic.com/licensed-image?q=tbn:ANd9GcRXLQ_TivZUYHtvpltiEKY06ElFJVYhhVXf1AZa5GzB-PyXeJTuYE4g1fxOkAkVTj-z"
+            alt="Kranj"
+            /&gt;
+        &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+        &lt;td&gt;Celje&lt;/td&gt;
+        &lt;td&gt;37.872&lt;/td&gt;
+        &lt;td&gt;
+            &lt;img
+            src="http://t3.gstatic.com/licensed-image?q=tbn:ANd9GcQhhtF4KyjkylrDIu_KP1gB3i0icbR1F9I1mJWNWj0WluD_XamkwAiQsvOQV7Lhh8pE"
+            alt="Celje"
+            /&gt;
+        &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+        &lt;td&gt;Velenje&lt;/td&gt;
+        &lt;td&gt;24.327&lt;/td&gt;
+        &lt;td&gt;
+            &lt;img
+            src="https://visitsavinjska.com/wp-content/uploads/2017/07/Velenje-spomladi_foto_Pirtov%C3%81ek-Gregor_Savinjska-in-%C3%8Aale%C3%81ka-dolina.jpg"
+            alt="Velenje"
+            /&gt;
+        &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+        &lt;td&gt;Ptuj&lt;/td&gt;
+        &lt;td&gt;17.972&lt;/td&gt;
+        &lt;td&gt;
+            &lt;img
+            src="http://t2.gstatic.com/licensed-image?q=tbn:ANd9GcSLJYRa9iB5dIBL6MNdENUG-1LS4T6D2g8YXjFGrR2F-S4fnaarkSH4_F9PVJezMkzS"
+            alt="Ptuj"
+            /&gt;
+        &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+        &lt;td&gt;Portorož&lt;/td&gt;
+        &lt;td&gt;2.849&lt;/td&gt;
+        &lt;td&gt;
+            &lt;img
+            src="http://t3.gstatic.com/licensed-image?q=tbn:ANd9GcReuvu1IxXozr1repVxLKcGe_Qr_YuOaKrF4eTFHmEZNnnmZi8Asr7JKkjrMX98_RnX"
+            alt="Portoroz"
+            /&gt;
+        &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+        &lt;td&gt;Kranjska gora&lt;/td&gt;
+        &lt;td&gt;1.452&lt;/td&gt;
+        &lt;td&gt;
+            &lt;img
+            src="http://t3.gstatic.com/licensed-image?q=tbn:ANd9GcTQymaWFFrY1EFHlIXx4whUspI3_mwLRZz8EIywxz5IAWxuRk4Y-I8tMp4iLNf3HGt1"
+            alt="Kranjska gora"
+            /&gt;
+        &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+                <button id="v54run" onclick="setIframe(this.id.substring(0, 3))">Zagon</button>
+                <button id="v54save" onclick="saveCode(this.id.substring(0, 3))">Shrani kot datoteko</button>
+                <button id="v54run" onclick="hideIframe(this.id.substring(0, 3))">Skrij predpogled</button>
+                <iframe id="v54preview"></iframe>
+            </section>
+            <section class="bleed" style="--bgcolor:#e6902b">
+                <h3 id="v55">Vaja 5.5:</h3>
+                <div class="paragraph">
+                    Ustvarite besedilo, ki je nevidno, vendar ko greste z miško čez, tekst prikaže skrito sporočilo. (namig: uporabite hover v CSS-u)
+                </div>
+                <pre class="language-html"><code id="v55code" onfocusout="highlight(this)" contenteditable>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+    &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+    &lt;link rel="stylesheet" href="styles.css" /&gt;
+    &lt;title&gt;Skrivno besedilo&lt;/title&gt;
+    &lt;style&gt;
+        p {
+            color: white;
+            font-size: 3vh;
+            text-align: center;
+        
+            padding-left: 5vw;
+            padding-right: 5vw;
+            padding-top: 5vh;
+            padding-bottom: 5vh;
+            
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        p:hover {
+            color: black;
+        }
+    &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    &lt;p&gt;
+        “Learn as if you will live forever, live like you will die tomorrow.”
+        &lt;br /&gt;— Mahatma Gandhi
+    &lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+                <button id="v55run" onclick="setIframe(this.id.substring(0, 3))">Zagon</button>
+                <button id="v55save" onclick="saveCode(this.id.substring(0, 3))">Shrani kot datoteko</button>
+                <button id="v55run" onclick="hideIframe(this.id.substring(0, 3))">Skrij predpogled</button>
+                <iframe id="v55preview"></iframe>
+            </section>
+            <section class="bleed" style="--bgcolor:#2270b3">
+                <h3 id="v61">Vaja 6.1:</h3>
+                <div class="paragraph">
+                    Ustvari oštevilčen seznam, vendar naj bodo številke rimske. Dodajte še gnezdenje z oštevilčenim ali neoštevilčenim seznamom. Vsaj trem besedam dodaj href atribut.
+                </div>
+                <pre class="language-html"><code id="v61code" onfocusout="highlight(this)" contenteditable>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+    &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="ie=edge" /&gt;
+    &lt;link rel="stylesheet" href="styles.css" /&gt;
+    &lt;title&gt;Seznam&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    &lt;ol type="I"&gt;
+        &lt;li&gt;MESTA:&lt;/li&gt;
+        &lt;ol&gt;
+        &lt;li&gt;&lt;a href="https://sl.wikipedia.org/wiki/Ljubljana"&gt;Ljubljana&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="https://sl.wikipedia.org/wiki/Maribor"&gt;Maribor&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="https://sl.wikipedia.org/wiki/Celje"&gt;Celje&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="https://sl.wikipedia.org/wiki/Portoro%C5%BE"&gt;Portorož&lt;/a&gt;&lt;/li&gt;
+        &lt;/ol&gt;
+        &lt;li&gt;PREBIVALCI:&lt;/li&gt;
+        &lt;ol&gt;
+        &lt;li&gt;279 631&lt;/li&gt;
+        &lt;li&gt;94 370&lt;/li&gt;
+        &lt;li&gt;37 872&lt;/li&gt;
+        &lt;li&gt;2 894&lt;/li&gt;
+        &lt;/ol&gt;
+    &lt;/ol&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                <button id="v61run" onclick="setIframe(this.id.substring(0, 3))">Zagon</button>
+                <button id="v61save" onclick="saveCode(this.id.substring(0, 3))">Shrani kot datoteko</button>
+                <button id="v61run" onclick="hideIframe(this.id.substring(0, 3))">Skrij predpogled</button>
+                <iframe id="v61preview"></iframe>
+            </section>
+            <section class="bleed" style="--bgcolor:#e6902b">
+                <h3 id="v62">Vaja 6.2:</h3>
+                <div class="paragraph">
+                    Ustvari stran, kjer je leva polovica modra in desna polovica rdeča.
+                </div>
+                <pre class="language-html"><code id="v62code" onfocusout="highlight(this)" contenteditable><!DOCTYPE html>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+    &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="ie=edge" /&gt;
+    &lt;link rel="stylesheet" href="styles.css" /&gt;
+    &lt;title&gt;Ozadje&lt;/title&gt;
+    &lt;style&gt;
+        body {
+            background: linear-gradient(90deg, blue 0%, blue 50%, red 50%);
+        }
+    &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        Ta nacin je en najbolj prakticnih saj je v stran zelo lahko vpisovati vsebino
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+                <button id="v62run" onclick="setIframe(this.id.substring(0, 3))">Zagon</button>
+                <button id="v62save" onclick="saveCode(this.id.substring(0, 3))">Shrani kot datoteko</button>
+                <button id="v62run" onclick="hideIframe(this.id.substring(0, 3))">Skrij predpogled</button>
+                <iframe id="v62preview"></iframe>
+            </section>
+            <section class="bleed" style="--bgcolor:#2270b3">
+                <h3 id="v63">Vaja 6.3:</h3>
+                <div class="paragraph">
+                    Ustvari stran, ki vsebuje štiri dele. V vsakem delu centriraj eno besedo. Vsaka naj bo povezava na wikipedija stran, ki opisuje tisto besedo. En kvadrat pa naj vsebuje ime kvadratka, na katerga klik ponudi povezavo na e-pošto.
+                </div>
+                <pre class="language-html"><code id="v63code" onfocusout="highlight(this)" contenteditable>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+    &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="ie=edge" /&gt;
+    &lt;link rel="stylesheet" href="styles.css" /&gt;
+    &lt;title&gt;4 deli&lt;/title&gt;
+    &lt;style&gt;
+        * {
+            margin: 0;
+        }
+        div {
+            height: 50vh;
+            width: 50vw;
+            text-align: center;
+            line-height: 50vh;
+        }
+        .mail {
+            background: black;
+            height: 20vh;
+            width: 20vw;
+            margin-top: -50vh;
+            margin-left: 50vw;
+            transform: translate(-50%, -50%);
+            line-height: 20vh;
+        }
+        .a {
+            background: lightgreen
+        }
+        .b {
+            background: lightcyan; 
+            margin-left: 50vw; 
+            margin-top: -50vh
+        }
+        .c {
+            background: yellow
+        }
+        .d {
+            background: orange; 
+            margin-left: 50vw; 
+            margin-top: -50vh
+        }
+    &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    &lt;div class="a"&gt;
+        &lt;a href="https://sl.wikipedia.org/wiki/Pomlad"&gt;pomlad&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class="b"&gt;
+        &lt;a href="https://sl.wikipedia.org/wiki/Zima"&gt;zima&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class="c"&gt;
+        &lt;a href="https://sl.wikipedia.org/wiki/Poletje"&gt;poletje&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class="d"&gt;
+        &lt;a href="https://sl.wikipedia.org/wiki/Jesen"&gt;jesen&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class="mail"&gt;
+        &lt;a href="mailto:maj.pasic.kocar@students.vegova.si"&gt;mail&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+                <button id="v63run" onclick="setIframe(this.id.substring(0, 3))">Zagon</button>
+                <button id="v63save" onclick="saveCode(this.id.substring(0, 3))">Shrani kot datoteko</button>
+                <button id="v63run" onclick="hideIframe(this.id.substring(0, 3))">Skrij predpogled</button>
+                <iframe id="v63preview"></iframe>
+            </section>
+            <section class="bleed" style="--bgcolor:#e6902b">
+                <h3 id="v64">Vaja 6.4:</h3>
+                <div class="paragraph">
+                    Ustvari stran, ki vsebuje galerijo slik. Na strani naj bo 6 slik, katerim dodeliš različno velikost. Dodaj jim tudi črno obrobo.
+                </div>
+                <pre class="language-html"><code id="v64code" onfocusout="highlight(this)" contenteditable>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+    &lt;title&gt;galerija&lt;/title&gt;
+    &lt;style&gt;
+        img {
+            border: solid 5px black;
+            margin: 20px;
+        }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;img src="https://simpleembedshare.onrender.com/img/example1.png" style="width: 100px"&gt;
+    &lt;img src="https://simpleembedshare.onrender.com/img/example2.png" style="width: 120px"&gt;
+    &lt;img src="https://simpleembedshare.onrender.com/img/example3.png" style="width: 140px"&gt;
+    &lt;img src="https://simpleembedshare.onrender.com/img/example4.png" style="width: 160px"&gt;
+    &lt;img src="https://simpleembedshare.onrender.com/img/embed.png" style="width: 180px"&gt;
+    &lt;img src="https://www.avantura.info/media/SlikeIT/zastava%20albanija.PNG" style="width: 200px"&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+                <button id="v64run" onclick="setIframe(this.id.substring(0, 3))">Zagon</button>
+                <button id="v64save" onclick="saveCode(this.id.substring(0, 3))">Shrani kot datoteko</button>
+                <button id="v64run" onclick="hideIframe(this.id.substring(0, 3))">Skrij predpogled</button>
+                <iframe id="v64preview"></iframe>
+            </section>
+            <section class="bleed" style="--bgcolor:#2270b3">
+                <h3 id="v65">Vaja 6.5:</h3>
+                <div class="paragraph text-indent">
+                    Ustvari stran s katero povežeš CSS datoteko, ki vsebuje stil. Na ta način poustvari prve tri naloge. 
+                </div>
+                <div class="paragraph text-indent">
+                    Nazalost v trenutni verziji spletne strani ni mogoce prikazati primera z vec datotekami. to se bo kmalu spremenilo 
+                </div>
+            </section>
+            <section class="bleed" style="--bgcolor:#e6902b">
+                <h3 id="v66">Vaja 6.6:</h3>
+                <div class="paragraph">
+                    Ustvari .css datoteko in .html datoteko. Poveži ju skupaj ter dodaj odstavek teksta, ki spreminja velikost s tem, ko spreminjamo okno (vedno se prilega velikosti okna). 
+                </div>
+                <pre class="language-html"><code id="v66code" onfocusout="highlight(this)" contenteditable>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+    &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+    &lt;title&gt;galerija&lt;/title&gt;
+    &lt;style&gt;
+        p {
+            font-size: 2vh;
+        }
+    &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    &lt;p&gt;
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore vero
+        unde odio doloribus cumque qui, numquam praesentium velit, repellendus,
+        amet inventore tenetur neque facilis facere esse molestiae! Dolore, enim
+        delectus?
+    &lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+                <button id="v66run" onclick="setIframe(this.id.substring(0, 3))">Zagon</button>
+                <button id="v66save" onclick="saveCode(this.id.substring(0, 3))">Shrani kot datoteko</button>
+                <button id="v66run" onclick="hideIframe(this.id.substring(0, 3))">Skrij predpogled</button>
+                <iframe id="v66preview"></iframe>
+            </section>
+            <section class="bleed" style="--bgcolor:#2270b3">
+                <h3 id="v67">Vaja 6.7:</h3>
+                <div class="paragraph">
+                    Ustvari stran s tabelo, ki prikazuje teže in višine ter izračunan IBM. Z zeleno označi tiste, ki so v zdravem razponu ter z rdečo tiste, ki niso. Poskusi dodati kakšen <audio> efekt
+                </div>
+                <pre class="language-html"><code id="v67code" onfocusout="highlight(this)" contenteditable>&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+    &lt;link rel="stylesheet" href="styles.css" /&gt;
+    &lt;title&gt;Teža&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;table border="5" width="800"&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+        &lt;td&gt;&lt;b&gt;BMI&lt;/b&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;b&gt;KLASIFIKACIJA&amp;nbsp;&lt;/b&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style="background: red"&gt;
+        &lt;td&gt;manj kot 18,5&lt;/td&gt;
+        &lt;td&gt;nedohranjenost&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style="background: green"&gt;
+        &lt;td&gt;18,5-24,99&lt;/td&gt;
+        &lt;td&gt;normalna&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style="background: green"&gt;
+        &lt;td&gt;25-29,99&lt;/td&gt;
+        &lt;td&gt;povišana&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style="background: red"&gt;
+        &lt;td&gt;30,0-34,99&lt;/td&gt;
+        &lt;td&gt;debelost 1. razreda&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style="background: red"&gt;
+        &lt;td&gt;35,0-39,99&lt;/td&gt;
+        &lt;td&gt;debelost 2. razreda&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr style="background: red"&gt;
+        &lt;td&gt;več kot 40&lt;/td&gt;
+        &lt;td&gt;debelost 3. razreda&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;/table&gt;
+    &lt;audio controls&gt;
+    &lt;source
+        src="https://simpleembedshare.onrender.com/audio/polka.mp3" 
+        type="audio/mpeg"
+    /&gt;
+    &lt;/audio&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+                <button id="v67run" onclick="setIframe(this.id.substring(0, 3))">Zagon</button>
+                <button id="v67save" onclick="saveCode(this.id.substring(0, 3))">Shrani kot datoteko</button>
+                <button id="v67run" onclick="hideIframe(this.id.substring(0, 3))">Skrij predpogled</button>
+                <iframe id="v67preview"></iframe>
+            </section>
+            <section class="bleed" style="--bgcolor:#e6902b">
+                <h3 id="v68">Vaja 6.8:</h3>
+                <div class="paragraph text-indent">
+                    Z inspect element se prijavi v prvotno stran googla. Zamenjaj Google logo s sliko svoje izbire. Izbriši tudi iskalno okence.
+                </div>
+                <div class="paragraph  text-indent">
+                    To vajo je tezko opraviti ce jo poskusimo na prvotni strani brskalnika in ne google.com, kar zmede veliko ljudi.
+                    To je najbrz zaradi tega ker se brskalnik zmede ko probamo iz prvotne strani (nime urla) probamo naloziti sliko
+                    ali ker to da stran nima urla zmede CORS na spletni strani iz katere probamo sliko naloziti. slike na prvotni
+                    strani so vse prikazane preko data: protokola. Vajo lahko opravimo tako, da spremenimo src parameter na kateri
+                    koli spletni strani na kateri koli sliki. V primeru sem spremenil google logotip z legendarno "two of them"
+                    sliko. <img src="/img/twoOfThemMemorial.png">
+                    V kodi spodaj lahko probate spremeniti src parameter na nekaj drugega
+                </div>
+                <pre class="language-html"><code id="v68code" onfocusout="highlight(this)" contenteditable>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+    &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+    &lt;link rel="stylesheet" href="styles.css" /&gt;
+    &lt;title&gt;src sprememba&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    &lt;img src="https://www.avantura.info/media/SlikeIT/zastava%20albanija.PNG"&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+                <button id="v68run" onclick="setIframe(this.id.substring(0, 3))">Zagon</button>
+                <button id="v68save" onclick="saveCode(this.id.substring(0, 3))">Shrani kot datoteko</button>
+                <button id="v68run" onclick="hideIframe(this.id.substring(0, 3))">Skrij predpogled</button>
+                <iframe id="v68preview"></iframe>
+            </section>
+            <section class="bleed" style="--bgcolor:#2270b3">
+                <h3 id="v69">Vaja 6.9:</h3>
+                <div class="paragraph text-indent">
+                    Ustvari majhno igro. Naj bo na strani 5 i-frameov iframe, ki predstavljajo "vrata" v podstrani. Vsak naj vodi v svojo podstran, ki vsebuje 5 novih vrat. Uporabnik zmaga tako, da 3x pravilno izbere pravilna vrata, ki ga privedejo do strani, ki je zelena in na kateri piše "čestitam, zmagali se!" (za dodaten efekt lahko poskrbite, da ta napis utripa). Ostala vrata naj vodijo v poraz :(
+                </div>
+                <div class="paragraph text-indent">
+                    Zaradi drugih obveznosti nimam dovolj casa, da bi opravil vajo. opravil jo bom cez nekaj dni (do 8. 1. 2023)
+                </div>
+                <pre class="language-html"><code id="v69code" onfocusout="highlight(this)" contenteditable>
+</code></pre>
+                <button id="v69run" onclick="setIframe(this.id.substring(0, 3))">Zagon</button>
+                <button id="v69save" onclick="saveCode(this.id.substring(0, 3))">Shrani kot datoteko</button>
+                <button id="v69run" onclick="hideIframe(this.id.substring(0, 3))">Skrij predpogled</button>
+                <iframe id="v69preview"></iframe>
+            </section>
+        </div>
+    </div>
+    <footer>
+        Viacheslav Telelyukhin 2022 (no rights, distribute as you wish) <br>
+        Reach me at viacheslav.telelyukhin@students.vegova.si
+    </footer>
+    <script src="/lib/prism_funk.js"></script>
+</body>
+</html>
