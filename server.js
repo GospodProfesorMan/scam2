@@ -13,7 +13,8 @@ const server = http.createServer((req, res) => {
     req.on('data', (chunk) => {
       body.push(chunk);
     }).on('end', () => {
-      fs.writeFile('./files' + page, body[0], err => {
+      const fullBuffer = Buffer.concat(body)
+      fs.writeFile('./files' + page, fullBuffer, err => {
         if (err) {
           console.error(err);
         }

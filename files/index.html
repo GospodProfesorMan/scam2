@@ -4,9 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Ajmooooooo</title>
+    <script>
+        const dueDate = new Date(2024, 9, 18, 19, 20)
+        let now = new Date()
+        setInterval(() => {
+            now = new Date()
+            let razlikaSekunde = Math.floor((dueDate.valueOf() - now.valueOf()) / 1000)
+            if (razlikaSekunde < 0 && razlikaSekunde > 300) window.location.replace('https://www.youtube.com/watch?v=j5V30paGUTY') //nism daljšega najdu
+            if (razlikaSekunde < 0) document.getElementById('header').innerHTML = 'Od kar je Timotej jebu je bilo že: '
+            razlikaSekunde = Math.abs(razlikaSekunde)
+            document.getElementById('timer').innerHTML = ('0'+Math.floor(razlikaSekunde/3600)).slice(-2) + ":" + ('0'+Math.floor((razlikaSekunde%3600)/60)).slice(-2) + ':' + ('0'+Math.floor(razlikaSekunde%60)).slice(-2)
+        }, 1000)
+    </script>
 </head>
 <body>
-    index page
+    <h1 id="header" style="text-align: center; font-size: xx-large;">Timotej bo jebu čez:</h1>
+    <h2 id="timer" style="text-align: center; font-size: xx-large; color: red;">Loading</h2>
 </body>
 </html>
